@@ -1,0 +1,42 @@
+<div class="panel panel-primary top-buffer">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ pageTitle }} : {{ contract.ClientName }}</h3>
+    </div>
+    <div class="panel-body">
+        <form (ngSubmit)='onSubmit()' #contractDetailForm='ngForm'>
+            <div class='panel-body'>
+                <div class='container-fluid'>
+                    <div class='row'>
+                        <label class='col-md-3'>Green Bin Count:</label>
+                        <div class='col-md-9'>
+                            <input name='txtGreenBinCount' type='text' class='form-control' [(ngModel)]='contract.GreenBinCount'>
+                        </div>
+                    </div>
+                    <div class='row top-buffer'>
+                        <label class='col-md-3'>Grey Bin Count:</label>
+                        <div class='col-md-9'>
+                            <input name='txtGreyBinCount' type='text' class='form-control' [(ngModel)]='contract.GreyBinCount'>
+                        </div>
+                    </div>
+                    <div class='row top-buffer'>
+                        <label class='col-md-3'>Blue Bin Count:</label>
+                        <div class='col-md-9'>
+                            <input name='txtBlueBinCount' type='text' class='form-control' [(ngModel)]='contract.BlueBinCount'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='panel-footer'>
+                <button type='submit' class='btn btn-primary' [disabled]='!contractDetailForm.form.valid' [title]='!contractDetailForm.form.valid ? "Fill in all required fields" : "Save Changes"'>
+                <i class='fa fa-save'></i> Save Changes
+            </button>
+                <a class='btn btn-default' (click)='onUndo()'>
+                    <i class='fa fa-undo'></i> Undo
+                </a>
+                <a class='btn btn-default' (click)='onBack()'>
+                    <i class='fa fa-arrow-left'></i> Go Back
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

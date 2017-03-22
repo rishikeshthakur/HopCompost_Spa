@@ -3,20 +3,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { IClient } from '../../models/client';
-import { ClientService } from './client.service';
+import { IBin } from '../../models/bin';
+import { BinService } from './bin.service';
 //import { NotificationService } from '../../shared/notification.service';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'client-detail.component.html'
+    templateUrl: 'bin-collection-detail.component.html'
 })
-export class ClientDetailComponent implements OnInit, OnDestroy {
-    pageTitle: string = 'Client Detail';
-    client: IClient = {};
+export class BinCollectionDetailComponent implements OnInit, OnDestroy {
+    pageTitle: string = 'Bin Collection';
+    bin: IBin = {};
     private sub: Subscription;
 
-    constructor(private _route: ActivatedRoute, private _router: Router, private _clientService: ClientService) {
+    constructor(private _route: ActivatedRoute, private _router: Router, private _binService: BinService) {
     }
 
     ngOnInit(): void {
@@ -27,35 +27,35 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
-    getClient(id: number) {
-        this.sub = this._clientService.getClient(id).subscribe(
-            client => this.client = client,
+    getBin(id: number) {
+        this.sub = this._binService.getBin(id).subscribe(
+            bin => this.bin = bin,
             error => {
-                //this._notificationService.error(ClientSettings.FAIL_TOGETASSET);
+                //this._notificationService.error(binSettings.FAIL_TOGETASSET);
             });
     }
 
     onSubmit(): void {
-        this.sub = this._clientService.saveClient(this.client).subscribe(
+        this.sub = this._binService.saveBin(this.bin).subscribe(
             success => {
-                //this._notificationService.success(ClientSettings.SUCCESS_SAVEASSET);
+                //this._notificationService.success(binSettings.SUCCESS_SAVEASSET);
                 this.onBack();
             },
             error => {
-                //this._notificationService.error(ClientSettings.FAIL_TOSAVEASSET);
+                //this._notificationService.error(binSettings.FAIL_TOSAVEASSET);
             }
         );
     }
 
     onBack(): void {
-        this._router.navigate(['/clients']);
+        this._router.navigate(['/welcome']);
     }
 
     onUndo(): void {
         this.sub = this._route.params.subscribe(
             params => {
                 let id = +params['id'];
-                if (id > 0) { this.getClient(id); }
+                if (id > 0) { this.getBin(id); }
             },
             error => {
                 //this._notificationService.error(AssetSettings.FAIL_TOGETASSET);

@@ -1,3 +1,5 @@
+import { ContractDetailComponent } from './contract-detail.component';
+import { ContractListComponent } from './contract-list.component';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../shared/shared.module';
@@ -14,7 +16,9 @@ import { ClientService } from './client.service';
   ],
   declarations: [
     ClientListComponent,
-    ClientDetailComponent
+    ClientDetailComponent,
+    ContractListComponent,
+    ContractDetailComponent
   ],
   providers: [
     ClientService

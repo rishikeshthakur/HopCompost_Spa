@@ -1,0 +1,44 @@
+<div class="panel panel-primary top-buffer">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ pageTitle }} : {{ bin.ClientName }}</h3>
+    </div>
+    <div class="panel-body">
+        <form (ngSubmit)='onSubmit()' #clientDetailForm='ngForm'>
+            <div class="form-group">
+                <label for="txtEmployee">Employee</label>
+                <input type="text" class="form-control" id="txtEmployee" placeholder="Employee" required>
+            </div>
+            <div class="form-group">
+                <label for="txtClient">Client</label>
+                <input type="text" class="form-control" id="txtClient" placeholder="Client" required>
+            </div>
+            <div class="form-group">
+                <label for="txtGreenBinCount">Green Bin Count</label>
+                <input type="number" class="form-control" id="txtGreenBinCount" placeholder="Green Bin Count">
+            </div>
+            <div class="form-group">
+                <label for="txtBlueBinCount">Blue Bin Count</label>
+                <input type="number" class="form-control" id="txtBlueBinCount" placeholder="Blue Bin Count">
+            </div>
+            <div class="form-group">
+                <label for="txtGreyBinCount">Grey Bin Count</label>
+                <input type="number" class="form-control" id="txtGreyBinCount" placeholder="Grey Bin Count">
+            </div>
+            <div class="form-group">
+                <label for="txtCollectionDate">Collection Date</label>
+                <input type="date" class="form-control" id="txtCollectionDate" placeholder="Collection Date" readonly>
+            </div>
+            <div class='panel-footer'>
+                <button type='submit' class='btn btn-primary' [disabled]='!clientDetailForm.form.valid' [title]='!clientDetailForm.form.valid ? "Fill in all required fields" : "Save Changes"'>
+                    <i class='fa fa-save'></i> Save Changes
+                </button>
+                <a class='btn btn-default' (click)='onUndo()'>
+                    <i class='fa fa-undo'></i> Undo
+                </a>
+                <a class='btn btn-default' (click)='onBack()'>
+                    <i class='fa fa-arrow-left'></i> Go Back
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

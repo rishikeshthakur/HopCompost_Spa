@@ -24,56 +24,59 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 //import { NotificationService } from '../../shared/notification.service';
 var client_service_1 = require("./client.service");
-var ClientListComponent = (function (_super) {
-    __extends(ClientListComponent, _super);
-    function ClientListComponent(_clientService, _route, _router) {
+var ContractListComponent = (function (_super) {
+    __extends(ContractListComponent, _super);
+    function ContractListComponent(_clientService, _route, _router) {
         var _this = _super.call(this) || this;
         _this._clientService = _clientService;
         _this._route = _route;
         _this._router = _router;
-        _this.pageTitle = 'Client List';
-        _this.clients = [];
+        _this.actionCompleted = new core_1.EventEmitter();
+        _this.pageTitle = 'Contract List';
         return _this;
     }
-    ClientListComponent.prototype.ngOnInit = function () {
-        this.getActiveClients();
+    ContractListComponent.prototype.ngOnInit = function () {
+        this.client = {};
     };
-    ClientListComponent.prototype.ngOnDestroy = function () {
-        this.sub.unsubscribe();
+    ContractListComponent.prototype.ngOnDestroy = function () {
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
     };
-    ClientListComponent.prototype.newClientOnClick = function () {
-        this._router.navigate(['/client', 0]);
+    ContractListComponent.prototype.newContractOnClick = function () {
+        this._router.navigate(['/contract', this.client.Id, 0]);
     };
-    ClientListComponent.prototype.onDelete = function (event) {
+    ContractListComponent.prototype.onDelete = function (event) {
         var _this = this;
         var target = event.target || event.srcElement || event.currentTarget;
         var idAttr = target.attributes.id;
         var id = idAttr.nodeValue;
-        this.sub = this._clientService.deleteClient(id).subscribe(function (success) {
-            //this._notificationService.success(ClientSettings.SUCCESS_SAVEASSET);
-            _this.getActiveClients();
+        this.sub = this._clientService.deleteContract(id).subscribe(function (success) {
+            //this._notificationService.success(ContractSettings.SUCCESS_SAVEASSET);
+            _this.actionCompleted.emit(true);
         }, function (error) {
-            //this._notificationService.error(ClientSettings.FAIL_TOSAVEASSET);
+            //this._notificationService.error(ContractSettings.FAIL_TOSAVEASSET);
+            _this.actionCompleted.emit(false);
         });
     };
-    ClientListComponent.prototype.getActiveClients = function () {
-        var _this = this;
-        this.sub = this._clientService.getActiveClients()
-            .subscribe(function (result) {
-            _this.clients = result;
-        }, function (error) {
-            //this._notificationService.error(ClientSettings.FAIL_TOGETCLIENTS);
-        });
-    };
-    return ClientListComponent;
+    return ContractListComponent;
 }(base_list_component_1.BaseListComponent));
-ClientListComponent = __decorate([
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], ContractListComponent.prototype, "client", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], ContractListComponent.prototype, "actionCompleted", void 0);
+ContractListComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        templateUrl: 'client-list.component.html'
+        selector: 'contract-list-tag',
+        templateUrl: 'contract-list.component.html'
     }),
     __metadata("design:paramtypes", [client_service_1.ClientService,
         router_1.ActivatedRoute, router_1.Router])
-], ClientListComponent);
-exports.ClientListComponent = ClientListComponent;
-//# sourceMappingURL=client-list.component.js.map
+], ContractListComponent);
+exports.ContractListComponent = ContractListComponent;
+//# sourceMappingURL=contract-list.component.js.map

@@ -6,35 +6,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var contract_detail_component_1 = require("./contract-detail.component");
-var contract_list_component_1 = require("./contract-list.component");
 var core_1 = require("@angular/core");
 var shared_module_1 = require("../../shared/shared.module");
-var client_routing_1 = require("./client.routing");
-var client_list_component_1 = require("./client-list.component");
-var client_detail_component_1 = require("./client-detail.component");
-var client_service_1 = require("./client.service");
-var ClientModule = (function () {
-    function ClientModule() {
+var bin_routing_1 = require("./bin.routing");
+var bin_collection_list_component_1 = require("./bin-collection-list.component");
+var bin_collection_detail_component_1 = require("./bin-collection-detail.component");
+var bin_processing_component_1 = require("./bin-processing.component");
+var bin_service_1 = require("./bin.service");
+var BinModule = (function () {
+    function BinModule() {
     }
-    return ClientModule;
+    return BinModule;
 }());
-ClientModule = __decorate([
+BinModule = __decorate([
     core_1.NgModule({
         imports: [
             shared_module_1.SharedModule,
-            client_routing_1.clientRouting
+            bin_routing_1.BinRouting
         ],
         declarations: [
-            client_list_component_1.ClientListComponent,
-            client_detail_component_1.ClientDetailComponent,
-            contract_list_component_1.ContractListComponent,
-            contract_detail_component_1.ContractDetailComponent
+            bin_collection_list_component_1.BinCollectionListComponent,
+            bin_collection_detail_component_1.BinCollectionDetailComponent,
+            bin_processing_component_1.BinProcessingComponent
         ],
         providers: [
-            client_service_1.ClientService
+            bin_service_1.BinService
         ]
     })
-], ClientModule);
-exports.ClientModule = ClientModule;
-//# sourceMappingURL=client.module.js.map
+], BinModule);
+exports.BinModule = BinModule;
+//# sourceMappingURL=bin.module.js.map

@@ -9,13 +9,18 @@ export class BaseService {
     }
 
     save(item: any, url: string, _http: Http) {
-        if (!item.id || item.id === 0) {
+        if (!item.Id || item.Id === 0) {
             return _http.post(url, JSON.stringify(item), this.getOptions())
                 .catch(this.handleError);
         }
 
-        return _http.put(`${url}/${item.id}`, JSON.stringify(item), this.getOptions())
+        return _http.put(`${url}/${item.Id}`, JSON.stringify(item), this.getOptions())
                 .catch(this.handleError);
+    }
+
+    delete(id: number, url: string, _http: Http) {
+        return _http.delete(`${url}?id=${id}`, this.getOptions())
+            .catch(this.handleError);
     }
 
     getOptions() : RequestOptions {

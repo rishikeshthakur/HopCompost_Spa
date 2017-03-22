@@ -23,4 +23,6 @@ export class AppComponent implements OnInit {
             this._router.navigate(['/welcome']);
         //}
     }
+
+    ngAfterViewInit() { (<any>$('#side-menu')).metisMenu(); }
 }

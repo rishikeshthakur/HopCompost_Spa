@@ -1,0 +1,52 @@
+<div class="panel panel-primary top-buffer">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ pageTitle }} : {{ client.Name }}</h3>
+    </div>
+    <div class="panel-body">
+        <form (ngSubmit)='onSubmit()' #clientDetailForm='ngForm'>
+            <div class='panel-body'>
+                <div class='container-fluid'>
+                    <div class='row'>
+                        <label class='col-md-2'>Name:</label>
+                        <div class='col-md-4'>
+                            <input name='txtName' type='text' class='form-control' [(ngModel)]='client.Name' required>
+                        </div>
+                        <label class='col-md-2'>Emergency Contact:</label>
+                        <div class='col-md-4'>
+                            <input name='txtEmergencyContact' type='text' class='form-control' [(ngModel)]='client.EmergencyContact'>
+                        </div>
+                    </div>
+                    <div class='row top-buffer'>
+                        <label class='col-md-2'>Address:</label>
+                        <div class='col-md-10'>
+                            <input name='txtAddress' type='text' class='form-control' [(ngModel)]='client.Address'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='panel-footer'>
+                <button type='submit' class='btn btn-primary' [disabled]='!clientDetailForm.form.valid' [title]='!clientDetailForm.form.valid ? "Fill in all required fields" : "Save Changes"'>
+                <i class='fa fa-save'></i> Save Changes
+            </button>
+                <a class='btn btn-default' (click)='onUndo()'>
+                    <i class='fa fa-undo'></i> Undo
+                </a>
+                <a class='btn btn-default' (click)='onBack()'>
+                    <i class='fa fa-arrow-left'></i> Go Back
+                </a>
+            </div>
+        </form>
+    </div>
+    <div class="panel-heading">
+        <h3 class="panel-title">Contracts</h3>
+    </div>
+    <div class="panel-body">
+        <div class='panel-body'>
+            <div class='container-fluid'>
+                <div class='row'>
+                    <contract-list-tag [client]='client' (actionCompleted)='onActionComplete($event)'></contract-list-tag>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

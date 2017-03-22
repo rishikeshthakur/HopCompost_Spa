@@ -4,7 +4,8 @@ var AppSettings = (function () {
     function AppSettings() {
     }
     Object.defineProperty(AppSettings, "ORIGIN", {
-        get: function () { return 'http://localhost/HopCompost_Api'; },
+        // private static get ORIGIN(): string { return 'http://localhost/HopCompost_Api'; } 
+        get: function () { return 'http://localhost:34940'; },
         enumerable: true,
         configurable: true
     });

@@ -1,8 +1,8 @@
-This is a front end solution for Interior Heavy Equipment Training School
+This is a front end solution for HopCompost
 
 To use this code:
 
-1) Open a command prompt in the project's root directory (IHEAdminSPA)
+1) Open a command prompt in the project's root directory (HopCompost_SPA)
 
 2) Type: `npm install`
     This installs the dependencies as defined in the package.json file.

@@ -10,11 +10,15 @@ var BaseService = (function () {
         return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
     BaseService.prototype.save = function (item, url, _http) {
-        if (!item.id || item.id === 0) {
+        if (!item.Id || item.Id === 0) {
             return _http.post(url, JSON.stringify(item), this.getOptions())
                 .catch(this.handleError);
         }
-        return _http.put(url + "/" + item.id, JSON.stringify(item), this.getOptions())
+        return _http.put(url + "/" + item.Id, JSON.stringify(item), this.getOptions())
+            .catch(this.handleError);
+    };
+    BaseService.prototype.delete = function (id, url, _http) {
+        return _http.delete(url + "?id=" + id, this.getOptions())
             .catch(this.handleError);
     };
     BaseService.prototype.getOptions = function () {

@@ -1,0 +1,33 @@
+<div [ngBusy]="sub">
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary" (click)="newContractOnClick()">Add new contract</button>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive top-buffer">
+        <table class="table table-hover" *ngIf='client.Contracts && client.Contracts.length'>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Green Bin Count</th>
+                    <th>Grey Bin Count</th>
+                    <th>Blue Bin Count</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let contract of client.Contracts'>
+                    <td><a [routerLink]="['/contract', contract.ClientId, contract.Id]"><i class="fa fa-edit"></i></a></td>
+                    <td>{{contract.GreenBinCount}}</td>
+                    <td>{{contract.GreyBinCount}}</td>
+                    <td>{{contract.BlueBinCount}}</td>
+                    <td>                        
+                        <button type="button" class="btn btn-danger" (click)="onDelete($event)" [id]="contract.Id">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

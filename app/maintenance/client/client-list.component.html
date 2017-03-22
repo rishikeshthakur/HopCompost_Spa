@@ -17,6 +17,7 @@
                     <th>Name</th>
                     <th class="hidden-xs">Address</th>
                     <th class="hidden-xs">Emergency Contact</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,9 @@
                     </td>
                     <td class="hidden-xs">{{client.Address}}</td>
                     <td class="hidden-xs">{{client.EmergencyContact}}</td>
+                    <td>                        
+                        <button type="button" class="btn btn-danger" (click)="onDelete($event)" [id]="client.Id">Delete</button>                        
+                    </td>
                 </tr>
             </tbody>
         </table>

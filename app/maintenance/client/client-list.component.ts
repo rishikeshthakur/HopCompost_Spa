@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs/Subscription';
 //import { NotificationService } from '../../shared/notification.service';
 import { ClientService } from './client.service';
 import { IClient } from '../../models/client';
-import { ClientSettings } from './client.settings';
 
 @Component({
     moduleId: module.id,
@@ -32,6 +31,22 @@ export class ClientListComponent extends BaseListComponent implements OnInit, On
 
     newClientOnClick(): void {
         this._router.navigate(['/client', 0]);
+    }
+
+    onDelete(event: any): void {
+        let target = event.target || event.srcElement || event.currentTarget;
+        let idAttr = target.attributes.id;
+        let id = idAttr.nodeValue;
+
+        this.sub = this._clientService.deleteClient(id).subscribe(
+            success => {
+                //this._notificationService.success(ClientSettings.SUCCESS_SAVEASSET);
+                this.getActiveClients();
+            },
+            error => {
+                //this._notificationService.error(ClientSettings.FAIL_TOSAVEASSET);
+            }
+        );
     }
 
     private getActiveClients(): void {

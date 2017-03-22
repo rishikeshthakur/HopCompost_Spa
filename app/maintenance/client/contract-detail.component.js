@@ -12,64 +12,62 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var client_service_1 = require("./client.service");
-//import { NotificationService } from '../../shared/notification.service';
-var ClientDetailComponent = (function () {
-    function ClientDetailComponent(_route, _router, _clientService) {
+var ContractDetailComponent = (function () {
+    function ContractDetailComponent(_route, _router, _clientService) {
         this._route = _route;
         this._router = _router;
         this._clientService = _clientService;
-        this.pageTitle = 'Client Detail';
-        this.client = {};
+        this.pageTitle = 'Contract Detail';
+        this.contract = {};
+        this.clientId = 0;
     }
-    ClientDetailComponent.prototype.ngOnInit = function () {
+    ContractDetailComponent.prototype.ngOnInit = function () {
         this.onUndo();
     };
-    ClientDetailComponent.prototype.ngOnDestroy = function () {
+    ContractDetailComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
     };
-    ClientDetailComponent.prototype.getClient = function (id) {
+    ContractDetailComponent.prototype.getContract = function (id) {
         var _this = this;
-        this.sub = this._clientService.getClient(id).subscribe(function (client) { return _this.client = client; }, function (error) {
-            //this._notificationService.error(ClientSettings.FAIL_TOGETASSET);
+        this.sub = this._clientService.getContract(id).subscribe(function (contract) {
+            _this.contract = contract;
+        }, function (error) {
+            //this._notificationService.error(ContractSettings.FAIL_TOGETASSET);
         });
     };
-    ClientDetailComponent.prototype.onSubmit = function () {
+    ContractDetailComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.sub = this._clientService.saveClient(this.client).subscribe(function (success) {
-            //this._notificationService.success(ClientSettings.SUCCESS_SAVEASSET);
+        this.contract.ClientId = this.clientId;
+        this.sub = this._clientService.saveContract(this.contract).subscribe(function (success) {
+            //this._notificationService.success(ContractSettings.SUCCESS_SAVEASSET);
             _this.onBack();
         }, function (error) {
-            //this._notificationService.error(ClientSettings.FAIL_TOSAVEASSET);
+            //this._notificationService.error(ContractSettings.FAIL_TOSAVEASSET);
         });
     };
-    ClientDetailComponent.prototype.onBack = function () {
-        this._router.navigate(['/clients']);
+    ContractDetailComponent.prototype.onBack = function () {
+        this._router.navigate(['/client', this.contract.ClientId]);
     };
-    ClientDetailComponent.prototype.onUndo = function () {
+    ContractDetailComponent.prototype.onUndo = function () {
         var _this = this;
         this.sub = this._route.params.subscribe(function (params) {
             var id = +params['id'];
             if (id > 0) {
-                _this.getClient(id);
+                _this.getContract(id);
             }
+            _this.clientId = +params['clientId'];
         }, function (error) {
             //this._notificationService.error(AssetSettings.FAIL_TOGETASSET);
         });
     };
-    ClientDetailComponent.prototype.onActionComplete = function (event) {
-        var isSuccess = event;
-        if (isSuccess) {
-            this.onUndo();
-        }
-    };
-    return ClientDetailComponent;
+    return ContractDetailComponent;
 }());
-ClientDetailComponent = __decorate([
+ContractDetailComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        templateUrl: 'client-detail.component.html'
+        templateUrl: 'contract-detail.component.html'
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router, client_service_1.ClientService])
-], ClientDetailComponent);
-exports.ClientDetailComponent = ClientDetailComponent;
-//# sourceMappingURL=client-detail.component.js.map
+], ContractDetailComponent);
+exports.ContractDetailComponent = ContractDetailComponent;
+//# sourceMappingURL=contract-detail.component.js.map

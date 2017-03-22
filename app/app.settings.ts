@@ -1,5 +1,6 @@
 export class AppSettings {
-    private static get ORIGIN(): string { return 'http://localhost/HopCompost_Api'; } 
+    // private static get ORIGIN(): string { return 'http://localhost/HopCompost_Api'; } 
+    private static get ORIGIN(): string { return 'http://localhost:34940'; } 
 
     public static get API_ENDPOINT(): string { return `${this.ORIGIN}/api`; }
     public static get WEB_FILESTORE(): string { return `${this.ORIGIN}/FileStore`; }

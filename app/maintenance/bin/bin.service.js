@@ -25,48 +25,30 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 var base_service_1 = require("../../shared/base.service");
 var app_settings_1 = require("../../app.settings");
-var ClientService = (function (_super) {
-    __extends(ClientService, _super);
-    function ClientService(_http) {
+var BinService = (function (_super) {
+    __extends(BinService, _super);
+    function BinService(_http) {
         var _this = _super.call(this) || this;
         _this._http = _http;
-        _this._clientUrl = app_settings_1.AppSettings.API_ENDPOINT + "/Client";
-        _this._contractUrl = app_settings_1.AppSettings.API_ENDPOINT + "/Contract";
+        _this._binUrl = app_settings_1.AppSettings.API_ENDPOINT + "/BinCollection";
         return _this;
     }
-    ClientService.prototype.getActiveClients = function () {
-        var url = "" + this._clientUrl;
-        return this._http.get(url, this.getOptions())
+    BinService.prototype.getBin = function (id) {
+        return this._http.get(this._binUrl + "?id=" + id, this.getOptions())
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    ClientService.prototype.getClient = function (id) {
-        return this._http.get(this._clientUrl + "?id=" + id, this.getOptions())
-            .map(function (response) { return response.json(); })
-            .catch(this.handleError);
+    BinService.prototype.saveBin = function (bin) {
+        return this.save(bin, this._binUrl, this._http);
     };
-    ClientService.prototype.saveClient = function (client) {
-        return this.save(client, this._clientUrl, this._http);
+    BinService.prototype.deleteBin = function (id) {
+        return this.delete(id, this._binUrl, this._http);
     };
-    ClientService.prototype.deleteClient = function (id) {
-        return this.delete(id, this._clientUrl, this._http);
-    };
-    ClientService.prototype.getContract = function (id) {
-        return this._http.get(this._contractUrl + "?id=" + id, this.getOptions())
-            .map(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
-    ClientService.prototype.saveContract = function (contract) {
-        return this.save(contract, this._contractUrl, this._http);
-    };
-    ClientService.prototype.deleteContract = function (id) {
-        return this.delete(id, this._contractUrl, this._http);
-    };
-    return ClientService;
+    return BinService;
 }(base_service_1.BaseService));
-ClientService = __decorate([
+BinService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])
-], ClientService);
-exports.ClientService = ClientService;
-//# sourceMappingURL=client.service.js.map
+], BinService);
+exports.BinService = BinService;
+//# sourceMappingURL=bin.service.js.map
