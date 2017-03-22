@@ -1,0 +1,9 @@
+<div class="text-center">
+	<div class="btn-group" role="group" aria-label="...">
+		<button type="button" class="btn btn-default" (click)='firstPageClick()' [disabled]='pageIndex === 1'><i class='fa fa-fast-backward'></i></button>
+		<button type="button" class="btn btn-default" (click)='previousPageClick()' [disabled]='pageIndex === 1'><i class='fa fa-arrow-left'></i></button>
+		<a class="btn btn-default"><span class="hidden-xs">Page: </span>{{ pageIndex }} of {{ totalPages }}</a>
+		<button type="button" class="btn btn-default" (click)='nextPageClick()' [disabled]='pageIndex === totalPages'><i class='fa fa-arrow-right'></i></button>
+		<button type="button" class="btn btn-default" (click)='lastPageClick()' [disabled]='pageIndex === totalPages'><i class='fa fa-fast-forward'></i></button>
+	</div>
+</div>

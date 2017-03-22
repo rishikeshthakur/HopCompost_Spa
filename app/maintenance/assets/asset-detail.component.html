@@ -1,0 +1,82 @@
+<div>
+    <div class='page-header'>
+        <h4>{{ pageTitle }} : {{ asset.quickName }}</h4>
+    </div>
+    <form (ngSubmit)='onSubmit()' #assetDetailForm='ngForm'>
+        <div class='panel-body'>
+            <div class='container-fluid'>
+                <div class='row'>
+                    <label class='col-md-2'>Name:</label>
+                    <div class='col-md-4'>
+                        <input name='txtName' type='text' class='form-control' [(ngModel)]='asset.name' required>
+                    </div>
+                    <label class='col-md-2'>Number:</label>
+                    <div class='col-md-4'>
+                        <input name='txtAssetNumber' type='text' class='form-control' [(ngModel)]='asset.assetNumber' required>
+                    </div>
+                </div>
+                <div class='row top-buffer'>
+                    <label class='col-md-2'>Make:</label>
+                    <div class='col-md-4'>
+                        <input name='txtMake' type='text' class='form-control' [(ngModel)]='asset.make'>
+                    </div>
+                    <label class='col-md-2'>Model:</label>
+                    <div class='col-md-4'>
+                        <input name='txtModel' type='text' class='form-control' [(ngModel)]='asset.model'>
+                    </div>
+                </div>
+                <div class='row top-buffer'>
+                    <label class='col-md-2'>Size Code:</label>
+                    <div class='col-md-4'>
+                        <input name='txtSizeCode' type='text' class='form-control' [(ngModel)]='asset.sizeCode' maxlength="10">
+                    </div>
+                    <label class='col-md-2'>Serial Number:</label>
+                    <div class='col-md-4'>
+                        <input name='txtSerialNumber' type='text' class='form-control' [(ngModel)]='asset.serialNumber'>
+                    </div>
+                </div>
+                <div class='row top-buffer'>
+                    <label class='col-md-2'>Type:</label>
+                    <div class='col-md-4'>
+                        <select name='slctType' class='form-control' [(ngModel)]='asset.typeId' required>
+                            <option [selected]='asset.Id == 0'></option>
+                            <option *ngFor="let type of assetTypes | async" [selected]='asset.typeId == type.id' [value]='type.id'>{{ type.name }}</option>
+                        </select>
+                    </div>
+                    <label class='col-md-2'>Location:</label>
+                    <div class='col-md-4'>
+                        <select name='slctLocation' class='form-control' [(ngModel)]='asset.locationId' required>
+                            <option [selected]='asset.Id == 0'></option>
+                            <option *ngFor="let location of locations | async" [selected]='asset.locationId == location.id' [value]='location.id'>{{ location.shortName }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class='row top-buffer'>
+                    <label class='col-md-2'>In Service:</label>
+                    <div class='col-md-4'>
+                        <div class='checkbox'>
+                            <label><input name='chkInService' type='checkbox' [(ngModel)]='asset.inService'></label>
+                        </div>
+                    </div>
+                    <label class='col-md-2'>Is Active:</label>
+                    <div class='col-md-4'>
+                        <div class='checkbox'>
+                            <label><input name='chkIsActive' type='checkbox' [(ngModel)]='asset.isActive'></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='panel-footer'>
+            <button type='submit' class='btn btn-primary' [disabled]='!assetDetailForm.form.valid' [title]='!assetDetailForm.form.valid ? "Fill in all required fields" : "Save Changes"'>
+                <i class='fa fa-save'></i> Save Changes
+            </button>
+            <a class='btn btn-default' (click)='onUndo()'>
+                <i class='fa fa-undo'></i> Undo
+            </a>
+            <a class='btn btn-default' (click)='onBack()'>
+                <i class='fa fa-arrow-left'></i> Go Back
+            </a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,14 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    // Controls auto save of dirty files. Accepted values:  "off", "afterDelay", "onFocusChange". If set to "afterDelay" you can configure the delay in "files.autoSaveDelay".
+    // "files.autoSave": "afterDelay",
+    // "files.autoSaveDelay": 1000,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/*.js":{ "when": "$(basename).ts" },
+        "**/*.js.map": true
+    }
+}
