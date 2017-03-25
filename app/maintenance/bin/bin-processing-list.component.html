@@ -1,0 +1,43 @@
+<div [ngBusy]="sub">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>{{ pageTitle }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Employee</th>
+                    <th>Client</th>
+                    <th class="hidden-xs">Green Bin</th>
+                    <th class="hidden-xs">Blue Bin</th>
+                    <th class="hidden-xs">Grey Bin</th>
+                    <th class="hidden-xs">Duration</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let bin of bins'>
+                    <td>
+                        <a [routerLink]="['/bin-processing', bin.Id]">
+                            <i class='fa fa-spinner'></i>
+                        </a>
+                    </td>
+                    <td>{{bin.EmployeeName}}</td>
+                    <td>{{bin.ClientName}}</td>
+                    <td class="hidden-xs">{{bin.GreenBinCount}}</td>
+                    <td class="hidden-xs">{{bin.BlueBinCount}}</td>
+                    <td class="hidden-xs">{{bin.GreyBinCount}}</td>
+                    <td class="hidden-xs">{{bin.CollectionDurationInMinutes}}</td>
+                    <td>{{bin.CollectionDate | moment}}</td>
+                    <td>{{bin.Status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

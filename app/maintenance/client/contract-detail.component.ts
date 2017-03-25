@@ -20,6 +20,8 @@ export class ContractDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.contract = {};
+        
         this.onUndo();
     }
 

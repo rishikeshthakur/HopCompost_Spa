@@ -55,6 +55,9 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
         this.sub = this._route.params.subscribe(
             params => {
                 let id = +params['id'];
+
+                this.client = {};
+
                 if (id > 0) { this.getClient(id); }
             },
             error => {
@@ -65,7 +68,7 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
     onActionComplete(event: any): void {
         let isSuccess = event as boolean;
 
-        if(isSuccess) {
+        if (isSuccess) {
             this.onUndo();
         }
     }

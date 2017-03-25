@@ -22,6 +22,7 @@ var ContractDetailComponent = (function () {
         this.clientId = 0;
     }
     ContractDetailComponent.prototype.ngOnInit = function () {
+        this.contract = {};
         this.onUndo();
     };
     ContractDetailComponent.prototype.ngOnDestroy = function () {

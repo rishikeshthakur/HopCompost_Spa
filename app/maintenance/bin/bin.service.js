@@ -31,14 +31,45 @@ var BinService = (function (_super) {
         var _this = _super.call(this) || this;
         _this._http = _http;
         _this._binUrl = app_settings_1.AppSettings.API_ENDPOINT + "/BinCollection";
+        _this._employeeUrl = app_settings_1.AppSettings.API_ENDPOINT + "/Employee";
+        _this._clientUrl = app_settings_1.AppSettings.API_ENDPOINT + "/Client";
         return _this;
     }
+    BinService.prototype.getEmployees = function () {
+        return this._http.get(this._employeeUrl + "/GetLookup", this.getOptions())
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    BinService.prototype.getClients = function () {
+        return this._http.get(this._clientUrl + "/GetLookup", this.getOptions())
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    BinService.prototype.getPastCollection = function (employeeId, clientId, selectedDate) {
+        return this._http.get(this._binUrl + "/GetPastCollection?employeeId=" + (employeeId ? employeeId : '') + "&clientId=" + (clientId ? clientId : '') + "&selectedDate=" + (selectedDate ? selectedDate : ''), this.getOptions())
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    BinService.prototype.getProcessingCollection = function () {
+        return this._http.get(this._binUrl + "/GetBinCollectionByStatus?status=Unprocessed", this.getOptions())
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    BinService.prototype.getBinWeightCollection = function (id) {
+        return this._http.get(this._binUrl + "/GetBinWeightCollection?id=" + id, this.getOptions())
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     BinService.prototype.getBin = function (id) {
         return this._http.get(this._binUrl + "?id=" + id, this.getOptions())
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    BinService.prototype.saveBinWeightCollection = function (binWeightCollection) {
+        return this.save(binWeightCollection, this._binUrl, this._http);
+    };
     BinService.prototype.saveBin = function (bin) {
+        bin.CollectionDate = null;
         return this.save(bin, this._binUrl, this._http);
     };
     BinService.prototype.deleteBin = function (id) {

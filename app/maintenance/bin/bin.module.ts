@@ -5,7 +5,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { BinRouting } from './bin.routing';
 import { BinCollectionListComponent } from './bin-collection-list.component';
 import { BinCollectionDetailComponent } from './bin-collection-detail.component';
-import { BinProcessingComponent } from './bin-processing.component';
+import { BinProcessingListComponent } from './bin-processing-list.component';
+import { BinProcessingDetailComponent } from './bin-processing-detail.component';
 import { BinService } from './bin.service';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { BinService } from './bin.service';
   declarations: [
     BinCollectionListComponent,
     BinCollectionDetailComponent,
-    BinProcessingComponent
+    BinProcessingListComponent,
+    BinProcessingDetailComponent,
   ],
   providers: [
     BinService

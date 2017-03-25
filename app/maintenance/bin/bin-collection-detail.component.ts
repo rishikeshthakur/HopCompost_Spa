@@ -1,9 +1,11 @@
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 
 import { IBin } from '../../models/bin';
+import { ILookup } from '../../models/lookup';
 import { BinService } from './bin.service';
 //import { NotificationService } from '../../shared/notification.service';
 
@@ -14,12 +16,17 @@ import { BinService } from './bin.service';
 export class BinCollectionDetailComponent implements OnInit, OnDestroy {
     pageTitle: string = 'Bin Collection';
     bin: IBin = {};
+    employees: Observable<ILookup[]>;
+    clients: Observable<ILookup[]>;
     private sub: Subscription;
 
     constructor(private _route: ActivatedRoute, private _router: Router, private _binService: BinService) {
     }
 
     ngOnInit(): void {
+        this.employees = this._binService.getEmployees();
+        this.clients = this._binService.getClients();
+
         this.onUndo();
     }
 
@@ -48,13 +55,20 @@ export class BinCollectionDetailComponent implements OnInit, OnDestroy {
     }
 
     onBack(): void {
-        this._router.navigate(['/welcome']);
+        if (this.bin.Id == 0) {
+            this._router.navigate(['/welcome']);
+        } else {
+            this._router.navigate(['/bin-collections']);
+        }
     }
 
     onUndo(): void {
         this.sub = this._route.params.subscribe(
             params => {
                 let id = +params['id'];
+
+                this.bin = {};
+
                 if (id > 0) { this.getBin(id); }
             },
             error => {
@@ -65,7 +79,7 @@ export class BinCollectionDetailComponent implements OnInit, OnDestroy {
     onActionComplete(event: any): void {
         let isSuccess = event as boolean;
 
-        if(isSuccess) {
+        if (isSuccess) {
             this.onUndo();
         }
     }

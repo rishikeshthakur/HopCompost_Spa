@@ -22,6 +22,8 @@ var BinCollectionDetailComponent = (function () {
         this.bin = {};
     }
     BinCollectionDetailComponent.prototype.ngOnInit = function () {
+        this.employees = this._binService.getEmployees();
+        this.clients = this._binService.getClients();
         this.onUndo();
     };
     BinCollectionDetailComponent.prototype.ngOnDestroy = function () {
@@ -43,12 +45,18 @@ var BinCollectionDetailComponent = (function () {
         });
     };
     BinCollectionDetailComponent.prototype.onBack = function () {
-        this._router.navigate(['/welcome']);
+        if (this.bin.Id == 0) {
+            this._router.navigate(['/welcome']);
+        }
+        else {
+            this._router.navigate(['/bin-collections']);
+        }
     };
     BinCollectionDetailComponent.prototype.onUndo = function () {
         var _this = this;
         this.sub = this._route.params.subscribe(function (params) {
             var id = +params['id'];
+            _this.bin = {};
             if (id > 0) {
                 _this.getBin(id);
             }

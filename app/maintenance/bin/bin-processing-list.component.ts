@@ -12,16 +12,10 @@ import { ILookup } from '../../models/lookup';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'bin-collection-list.component.html'
+    templateUrl: 'bin-processing-list.component.html'
 })
-export class BinCollectionListComponent extends BaseListComponent implements OnInit, OnDestroy {
-    pageTitle: string = 'Bin Collection List';
-    employees: Observable<ILookup[]>;
-    clients: Observable<ILookup[]>;
-    origin: string;
-    employeeId: number;
-    clientId: number;
-    selectedDate: Date;
+export class BinProcessingListComponent extends BaseListComponent implements OnInit, OnDestroy {
+    pageTitle: string = 'Bin Processing List';
     bins: IBin[] = [];
     private sub: Subscription;
 
@@ -31,8 +25,7 @@ export class BinCollectionListComponent extends BaseListComponent implements OnI
     }
 
     ngOnInit(): void {
-        this.employees = this._binService.getEmployees();
-        this.clients = this._binService.getClients();
+        this.getProcessingCollection();
     }
 
     ngOnDestroy() {
@@ -41,20 +34,8 @@ export class BinCollectionListComponent extends BaseListComponent implements OnI
         }
     }
 
-    searchOnClick(): void {
-        this.getPastCollection();
-    }
-
-    employeeFilterChange(event: any): void {
-        this.employeeId = event.target.value;
-    }
-
-    clientFilterChange(event: any): void {
-        this.clientId = event.target.value;
-    }
-
-    getPastCollection(): void {
-        this.sub = this._binService.getPastCollection(this.employeeId, this.clientId, this.selectedDate)
+    getProcessingCollection(): void {
+        this.sub = this._binService.getProcessingCollection()
             .subscribe(result => {
                 this.bins = result;
             });

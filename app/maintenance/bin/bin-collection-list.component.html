@@ -1,0 +1,70 @@
+<div [ngBusy]="sub">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>{{ pageTitle }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Employee</th>
+                    <th>Client</th>
+                    <th class="hidden-xs">Green Bin</th>
+                    <th class="hidden-xs">Blue Bin</th>
+                    <th class="hidden-xs">Grey Bin</th>
+                    <th class="hidden-xs">Duration</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>
+                        <select name='selectEmployee' class='form-control' [(ngModel)]='employeeId' (change)="employeeFilterChange($event)">
+                            <option [selected]>--Select--</option>
+                            <option>--All--</option>
+                            <option *ngFor="let selectItem of employees | async" [value]='selectItem.Value'>{{ selectItem.Text }}</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select name='selectClient' class='form-control' [(ngModel)]='clientId' (change)="clientFilterChange($event)">
+                            <option [selected]>--Select--</option>
+                            <option>--All--</option>
+                            <option *ngFor="let selectItem of clients | async" [value]='selectItem.Value'>{{ selectItem.Text }}</option>
+                        </select>
+                    </th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                    <th>
+                        <input class="form-control" type="date" name="selectedDate" [(ngModel)]='selectedDate'>
+                    </th>
+                    <th>
+                        <input name="btnSearch" class="btn btn-primary btn-block" type="button" (click)="searchOnClick()" value="Search">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let bin of bins'>
+                    <td>
+                        <a [routerLink]="['/bin-collection', bin.Id]">
+                            <i class='fa fa-edit'></i>
+                        </a>
+                    </td>
+                    <td>{{bin.EmployeeName}}</td>
+                    <td>{{bin.ClientName}}</td>
+                    <td class="hidden-xs">{{bin.GreenBinCount}}</td>
+                    <td class="hidden-xs">{{bin.BlueBinCount}}</td>
+                    <td class="hidden-xs">{{bin.GreyBinCount}}</td>
+                    <td class="hidden-xs">{{bin.CollectionDurationInMinutes}}</td>
+                    <td>{{bin.CollectionDate | moment}}</td>
+                    <td>{{bin.Status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

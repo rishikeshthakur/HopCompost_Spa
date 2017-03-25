@@ -7,6 +7,7 @@ export interface IBin {
     GreenBinCount?: number;
     BlueBinCount?: number;
     GreyBinCount?: number;
-    Duration?: number;
+    CollectionDurationInMinutes?: number;
     CollectionDate?: Date;
+    Status?: string;
 }

@@ -1,0 +1,58 @@
+<div class="panel panel-primary top-buffer">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ pageTitle }}</h3>
+    </div>
+    <div class="panel-body">
+        <form (ngSubmit)='onSubmit()' #binProessingDetailForm='ngForm'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        Client Name:
+                    </div>
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                        {{binWeightCollection.ClientName}}
+                    </div>
+                </div>
+                <div class="row top-buffer">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Bin #</th>
+                                    <th>Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor='let binWeight of binWeightCollection.BinWeights'>
+                                    <td>{{binWeight.BinNumber}}</td>
+                                    <td>
+                                        <input type='number' name="txtBinWeight" [(ngModel)]="binWeight.Weight" class="form-control">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row top-buffer">
+                    <div class="col-md-5">
+                        Processing Complete:
+                    </div>
+                    <div class="col-md-7">
+                        <input type="checkbox" name="chkProcessingComplete" [(ngModel)]="binWeightCollection.Processed">
+                    </div>
+                </div>
+                <div class='row top-buffer'>
+                    <button type='submit' class='btn btn-primary' [disabled]='!binProessingDetailForm.form.valid' [title]='!binProessingDetailForm.form.valid ? "Fill in all required fields" : "Save"'>
+                    <i class='fa fa-save'></i> Save
+                </button>
+                    <a class='btn btn-default' (click)='onUndo()'>
+                        <i class='fa fa-undo'></i> Undo
+                    </a>
+                    <a class='btn btn-default' (click)='onBack()'>
+                        <i class='fa fa-arrow-left'></i> Back
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

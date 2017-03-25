@@ -24,51 +24,41 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 //import { NotificationService } from '../../shared/notification.service';
 var bin_service_1 = require("./bin.service");
-var BinCollectionListComponent = (function (_super) {
-    __extends(BinCollectionListComponent, _super);
-    function BinCollectionListComponent(_binService, _route, _router) {
+var BinProcessingListComponent = (function (_super) {
+    __extends(BinProcessingListComponent, _super);
+    function BinProcessingListComponent(_binService, _route, _router) {
         var _this = _super.call(this) || this;
         _this._binService = _binService;
         _this._route = _route;
         _this._router = _router;
-        _this.pageTitle = 'Bin Collection List';
+        _this.pageTitle = 'Bin Processing List';
         _this.bins = [];
         return _this;
     }
-    BinCollectionListComponent.prototype.ngOnInit = function () {
-        this.employees = this._binService.getEmployees();
-        this.clients = this._binService.getClients();
+    BinProcessingListComponent.prototype.ngOnInit = function () {
+        this.getProcessingCollection();
     };
-    BinCollectionListComponent.prototype.ngOnDestroy = function () {
+    BinProcessingListComponent.prototype.ngOnDestroy = function () {
         if (this.sub) {
             this.sub.unsubscribe();
         }
     };
-    BinCollectionListComponent.prototype.searchOnClick = function () {
-        this.getPastCollection();
-    };
-    BinCollectionListComponent.prototype.employeeFilterChange = function (event) {
-        this.employeeId = event.target.value;
-    };
-    BinCollectionListComponent.prototype.clientFilterChange = function (event) {
-        this.clientId = event.target.value;
-    };
-    BinCollectionListComponent.prototype.getPastCollection = function () {
+    BinProcessingListComponent.prototype.getProcessingCollection = function () {
         var _this = this;
-        this.sub = this._binService.getPastCollection(this.employeeId, this.clientId, this.selectedDate)
+        this.sub = this._binService.getProcessingCollection()
             .subscribe(function (result) {
             _this.bins = result;
         });
     };
-    return BinCollectionListComponent;
+    return BinProcessingListComponent;
 }(base_list_component_1.BaseListComponent));
-BinCollectionListComponent = __decorate([
+BinProcessingListComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        templateUrl: 'bin-collection-list.component.html'
+        templateUrl: 'bin-processing-list.component.html'
     }),
     __metadata("design:paramtypes", [bin_service_1.BinService,
         router_1.ActivatedRoute, router_1.Router])
-], BinCollectionListComponent);
-exports.BinCollectionListComponent = BinCollectionListComponent;
-//# sourceMappingURL=bin-collection-list.component.js.map
+], BinProcessingListComponent);
+exports.BinProcessingListComponent = BinProcessingListComponent;
+//# sourceMappingURL=bin-processing-list.component.js.map

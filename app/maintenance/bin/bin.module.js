@@ -11,7 +11,8 @@ var shared_module_1 = require("../../shared/shared.module");
 var bin_routing_1 = require("./bin.routing");
 var bin_collection_list_component_1 = require("./bin-collection-list.component");
 var bin_collection_detail_component_1 = require("./bin-collection-detail.component");
-var bin_processing_component_1 = require("./bin-processing.component");
+var bin_processing_list_component_1 = require("./bin-processing-list.component");
+var bin_processing_detail_component_1 = require("./bin-processing-detail.component");
 var bin_service_1 = require("./bin.service");
 var BinModule = (function () {
     function BinModule() {
@@ -27,7 +28,8 @@ BinModule = __decorate([
         declarations: [
             bin_collection_list_component_1.BinCollectionListComponent,
             bin_collection_detail_component_1.BinCollectionDetailComponent,
-            bin_processing_component_1.BinProcessingComponent
+            bin_processing_list_component_1.BinProcessingListComponent,
+            bin_processing_detail_component_1.BinProcessingDetailComponent,
         ],
         providers: [
             bin_service_1.BinService

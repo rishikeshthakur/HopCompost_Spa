@@ -36,6 +36,7 @@ var ClientListComponent = (function (_super) {
         return _this;
     }
     ClientListComponent.prototype.ngOnInit = function () {
+        this.clients = [];
         this.getActiveClients();
     };
     ClientListComponent.prototype.ngOnDestroy = function () {

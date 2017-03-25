@@ -22,6 +22,8 @@ export class ClientListComponent extends BaseListComponent implements OnInit, On
     }
 
     ngOnInit(): void {
+        this.clients = [];
+        
         this.getActiveClients();
     }
 
