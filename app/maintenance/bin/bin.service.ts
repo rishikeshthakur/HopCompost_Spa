@@ -60,7 +60,7 @@ export class BinService extends BaseService {
     }
 
     saveBinWeightCollection(binWeightCollection: IBinWeightCollection) {
-        return this.save(binWeightCollection, this._binUrl, this._http);
+        return this.save(binWeightCollection, `${this._binUrl}/PostBinWeightCollection`, this._http);
     }
 
     saveBin(bin: IBin) {

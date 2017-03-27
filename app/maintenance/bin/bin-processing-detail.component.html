@@ -6,11 +6,11 @@
         <form (ngSubmit)='onSubmit()' #binProessingDetailForm='ngForm'>
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        Client Name:
-                    </div>
-                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                        {{binWeightCollection.ClientName}}
+                    <div class="padding-left-zero">
+                         <tr>
+                            <th>Client Name: </th>
+                            <th>{{binWeightCollection.ClientName}}</th>
+                        </tr>                       
                     </div>
                 </div>
                 <div class="row top-buffer">
@@ -23,10 +23,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor='let binWeight of binWeightCollection.BinWeights'>
-                                    <td>{{binWeight.BinNumber}}</td>
+                                <tr *ngFor='let binWeight of binWeightCollection.BinWeights; let i = index'>
+                                    <td>{{i+1}}</td>
                                     <td>
-                                        <input type='number' name="txtBinWeight" [(ngModel)]="binWeight.Weight" class="form-control">
+                                        <input type='number' [(ngModel)]="binWeight.Weight" class="form-control" [ngModelOptions]="{standalone: true}">
                                     </td>
                                 </tr>
                             </tbody>
@@ -34,10 +34,8 @@
                     </div>
                 </div>
                 <div class="row top-buffer">
-                    <div class="col-md-5">
+                    <div>
                         Processing Complete:
-                    </div>
-                    <div class="col-md-7">
                         <input type="checkbox" name="chkProcessingComplete" [(ngModel)]="binWeightCollection.Processed">
                     </div>
                 </div>

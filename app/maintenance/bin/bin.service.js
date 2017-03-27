@@ -66,7 +66,7 @@ var BinService = (function (_super) {
             .catch(this.handleError);
     };
     BinService.prototype.saveBinWeightCollection = function (binWeightCollection) {
-        return this.save(binWeightCollection, this._binUrl, this._http);
+        return this.save(binWeightCollection, this._binUrl + "/PostBinWeightCollection", this._http);
     };
     BinService.prototype.saveBin = function (bin) {
         bin.CollectionDate = null;
