@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var client_module_1 = require("./client/client.module");
-var bin_module_1 = require("./bin/bin.module");
+var bin_module_1 = require("./binprocess/bin.module");
 var MaintenanceModule = (function () {
     function MaintenanceModule() {
     }
