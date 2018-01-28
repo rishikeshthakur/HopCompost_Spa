@@ -2,7 +2,7 @@
 {
     // Controls auto save of dirty files. Accepted values:  "off", "afterDelay", "onFocusChange". If set to "afterDelay" you can configure the delay in "files.autoSaveDelay".
     // "files.autoSave": "afterDelay",
-    // "files.autoSaveDelay": 1000,
+    // "files.autoSaveDelay": 1500,
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
